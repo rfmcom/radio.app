@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playlist xmlns="http://xspf.org/ns/0/" xmlns:vlc="http://www.videolan.org/vlc/playlist/ns/0/" version="1">
+	<title>Lo-Fi Radio Playlist</title>
+	<trackList>
+		<!-- <track>
+			<title>Lofi Hip Hop Radio - Beats to Relax/Study to</title>
+			<location>https://www.youtube.com/watch?v=jfKfPfyJRdk</location>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>0</vlc:id>
+				<vlc:option>no-video</vlc:option>
+			</extension>
+		</track> -->
+		<!-- <track>
+			<location>https://manifest.googlevideo.com/api/manifest/hls_variant/expire/1698097843/ei/U5Y2ZdHbGJSqp-oP8b-UyAc/ip/83.41.33.104/id/jfKfPfyJRdk.2/source/yt_live_broadcast/requiressl/yes/tx/51012156/txs/51012155%2C51012156%2C51012157/hfr/1/playlist_duration/30/manifest_duration/30/maudio/1/spc/UWF9f3m0Mn3GBB8mMajDhrNr9XBXQ1DeCzrnkwuwNw/vprv/1/go/1/pacing/0/nvgoi/1/keepalive/yes/fexp/24007246/beids/24350018/dover/11/itag/0/playlist_type/DVR/sparams/expire%2Cei%2Cip%2Cid%2Csource%2Crequiressl%2Ctx%2Ctxs%2Chfr%2Cplaylist_duration%2Cmanifest_duration%2Cmaudio%2Cspc%2Cvprv%2Cgo%2Citag%2Cplaylist_type/sig/AGM4YrMwRQIgEPItiWCoJe_fmwpN4eOy9f0IvqD0xP9Hy4vePQepQ58CIQCOTF0H3rtKjzI9gneIcQUkm7OU6l7KOtaIXD4VnBZwGg%3D%3D/file/index.m3u8</location>
+			<title>lofi hip hop radio - beats to relax/study to</title>
+			<creator>Lofi Girl</creator>
+			<info>https://www.youtube.com/watch?v=jfKfPfyJRdk</info>
+			<duration>30000</duration>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>0</vlc:id>
+				<vlc:option>no-video</vlc:option>
+			</extension>
+		</track> -->
+		<track>
+			<title>NIA Radio - Lofi (Nouméa, Nouvelle-Calédonie)</title>
+			<location>https://radio.nia.nc/radio/8020/lofi-hq-stream.aac</location>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>1</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<title>Lofi BoxRadio</title>
+			<location>https://boxradio-edge-05.streamafrica.net/lofi</location>
+			<info>https://player.boxradio.net/</info>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>2</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<title>NRJ - Lo-Fi (Paris France)</title>
+			<location>https://radio.garden/api/ara/content/listen/wYBoA74O/channel.mp3</location>
+			<info>http://radio.garden/listen/nrj-lo-fi/wYBoA74O</info>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>3</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<title>FreeCodeCamp Radio</title>
+			<location>https://coderadio-admin.freecodecamp.org/radio/8010/radio.mp3</location>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>4</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<title>Suma FM Lush (San Francisco CA, United Stated)</title>
+			<location>https://ice1.somafm.com/lush-128-mp3</location>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>5</vlc:id>
+			</extension>
+		</track>
+		<track>
+			<title>bigFM LoFi Focus (Stuttgart, Germany)</title>
+			<location>https://audiotainment-sw.streamabc.net/atsw-lofifocus-mp3-128-3757575</location>
+			<extension application="http://www.videolan.org/vlc/playlist/0">
+				<vlc:id>6</vlc:id>
+			</extension>
+		</track>
+	</trackList>
+</playlist>
