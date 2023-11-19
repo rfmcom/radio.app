@@ -144,6 +144,9 @@
         // Retrieve the last selected radio index from localStorage
         const lastSelectedRadioIndex = localStorage.getItem('lastSelectedRadioIndex');
 
+        // Log the value to the console
+        console.log(lastSelectedRadioIndex);
+
         // Set the initial selected index to the last selected index or 0 if none is found
         const initialSelectedIndex = lastSelectedRadioIndex !== null ? parseInt(lastSelectedRadioIndex, 10) : 0;
 
@@ -188,13 +191,19 @@
                 img.style.backgroundColor = radio.tintColor;
                 img.onclick = () => changeChannel(index, img);
 
+                // Set the selected class for the last selected station
+                if (index === initialSelectedIndex) {
+                    img.classList.add('selected');
+                    selectedRadioNameDiv.textContent = radio.name;
+                    radioPlayer.src = radio.streamUrl;
+                }
+
                 radioListDiv.appendChild(img);
             });
         }
 
         // Play the initial channel when the page loads
         generateRadioIcons();
-        changeChannel(0, document.querySelector('.radio-icon'));
     </script>
 
 </body>
