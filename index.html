@@ -10,32 +10,23 @@
             background-color: #282c35;
             color: #fff;
             font-family: Arial, sans-serif;
-            display: flex;
-            /* Use flexbox for horizontal centering */
-            flex-direction: column;
-            /* Stack children vertically */
-            align-items: center;
-            /* Center children horizontally */
-            justify-content: center;
-            /* Center children vertically */
-            height: 100vh;
-            /* Use 100% of the viewport height */
-            margin: 0;
-            /* Remove default margin */
+            display: flex;  /* Use flexbox for horizontal centering */
+            flex-direction: column;  /* Stack children vertically */
+            align-items: center;  /* Center children horizontally */
+            justify-content: center;  /* Center children vertically */
+            height: 100vh;  /* Use 100% of the viewport height */
+            margin: 0;  /* Remove default margin */
         }
 
         .radio-icon {
-            width: 100px;
-            height: 100px;
-            margin: 15px;
+            width: 120px;
+            height: 120px;
+            margin: 12px;
             border-radius: 5px;
-            /* Add margin for spacing between icons */
             cursor: pointer;
-            box-sizing: border-box;
             user-drag: none;
             -webkit-user-drag: none;
-            transition: transform 0.5s ease-in-out, box-shadow 0.1s ease-in-out;
-            /* Add transition for both margin and transform */
+            transition: transform 0.4s ease-in-out, box-shadow 0.2s ease-in-out;  /* Add transition for both shadow and transform */
         }
 
         .selected {
@@ -45,7 +36,6 @@
             /* Adjust the scale factor */
             box-sizing: border-box;
         }
-
 
         #selectedRadioName {
             text-align: center;
@@ -186,18 +176,14 @@
                 const img = document.createElement('img');
                 img.src = radio.image;
                 img.alt = radio.name;
+                img.title = radio.name;
                 img.className = 'radio-icon';
-                img.title = radio.name; // Add title attribute for tooltip
-                img.style.backgroundColor = radio.tintColor;
-                img.onclick = () => changeChannel(index, img);
-
-                // Set the selected class for the last selected station
                 if (index === initialSelectedIndex) {
                     img.classList.add('selected');
                     selectedRadioNameDiv.textContent = radio.name;
                     radioPlayer.src = radio.streamUrl;
                 }
-
+                img.onclick = () => changeChannel(index, img);
                 radioListDiv.appendChild(img);
             });
         }
