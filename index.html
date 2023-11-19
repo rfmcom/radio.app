@@ -141,6 +141,12 @@
             // Add other radio stations here
         ];
 
+        // Retrieve the last selected radio index from localStorage
+        const lastSelectedRadioIndex = localStorage.getItem('lastSelectedRadioIndex');
+
+        // Set the initial selected index to the last selected index or 0 if none is found
+        const initialSelectedIndex = lastSelectedRadioIndex !== null ? parseInt(lastSelectedRadioIndex, 10) : 0;
+
         // Display the selected radio name
         const selectedRadioNameDiv = document.getElementById('selectedRadioName');
 
@@ -154,6 +160,9 @@
 
             const selectedRadio = radioList[index];
             selectedRadioNameDiv.textContent = selectedRadio.name;
+
+            // Save the selected index to localStorage
+            localStorage.setItem('lastSelectedRadioIndex', index);
 
             // Check if the player is paused before changing the channel
             if (radioPlayer.paused) {
