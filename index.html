@@ -6,16 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lofi Moai</title>
     <style>
+        @font-face {
+            font-family: 'JetBrains Mono';
+            src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
+                 url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
         body {
+            font-family: 'JetBrains Mono', monospace;
             background-color: #282c35;
-            color: #fff;
-            font-family: Arial, sans-serif;
+            color: #eee;
             display: flex;  /* Use flexbox for horizontal centering */
             flex-direction: column;  /* Stack children vertically */
             align-items: center;  /* Center children horizontally */
             justify-content: center;  /* Center children vertically */
             height: 100vh;  /* Use 100% of the viewport height */
             margin: 0;  /* Remove default margin */
+        }
+
+        #radioList {
+            display: flex;
+            flex-wrap: wrap; /* Allow icons to wrap to the next row */
+            justify-content: center; /* Center icons horizontally */
+            text-align: center; /* Center the text within the container */
         }
 
         .radio-icon {
@@ -31,16 +47,12 @@
 
         .selected {
             box-shadow: 0 0 5px 3px #aaa;
-            /* Darker border color when selected */
-            transform: scale(1.2);
-            /* Adjust the scale factor */
-            box-sizing: border-box;
+            transform: scale(1.2);  /* Adjust the scale factor */
         }
 
         #selectedRadioName {
             text-align: center;
-            margin-top: 10px;
-            font-weight: bold;
+            margin-bottom: 10px;
         }
 
         audio {
@@ -53,13 +65,9 @@
 </head>
 
 <body>
-
     <div id="radioList"></div>
-
     <br>
-
     <div id="selectedRadioName"></div>
-
     <audio controls id="radioPlayer">
         <source src="" type="audio/mp3">
         Your browser does not support the audio element.
@@ -76,6 +84,7 @@
             {
                 name: 'Chillsky.com',
                 image: 'Radio-Chillsky.png',
+                infoUrl: 'https://chillsky.com',
                 streamUrl: 'https://lfhh.radioca.st/stream'
             },
             {
@@ -135,7 +144,7 @@
         const lastSelectedRadioIndex = localStorage.getItem('lastSelectedRadioIndex');
 
         // Log the value to the console
-        console.log('localStorage radio idx:' + lastSelectedRadioIndex);
+        console.log('localStorage radio index:', lastSelectedRadioIndex);
 
         // Set the initial selected index to the last selected index or 0 if none is found
         const initialSelectedIndex = lastSelectedRadioIndex !== null ? parseInt(lastSelectedRadioIndex, 10) : 0;
@@ -152,7 +161,7 @@
             icon.classList.add('selected');
 
             const selectedRadio = radioList[index];
-            selectedRadioNameDiv.textContent = selectedRadio.name;
+            selectedRadioNameDiv.textContent = selectedRadio.name + '';
 
             // Save the selected index to localStorage
             localStorage.setItem('lastSelectedRadioIndex', index);
@@ -193,5 +202,4 @@
     </script>
 
 </body>
-
 </html>
