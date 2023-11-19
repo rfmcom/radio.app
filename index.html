@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,28 +10,42 @@
             background-color: #282c35;
             color: #fff;
             font-family: Arial, sans-serif;
-            display: flex; /* Use flexbox for horizontal centering */
-            flex-direction: column; /* Stack children vertically */
-            align-items: center; /* Center children horizontally */
-            justify-content: center; /* Center children vertically */
-            height: 100vh; /* Use 100% of the viewport height */
-            margin: 0; /* Remove default margin */
+            display: flex;
+            /* Use flexbox for horizontal centering */
+            flex-direction: column;
+            /* Stack children vertically */
+            align-items: center;
+            /* Center children horizontally */
+            justify-content: center;
+            /* Center children vertically */
+            height: 100vh;
+            /* Use 100% of the viewport height */
+            margin: 0;
+            /* Remove default margin */
         }
 
         .radio-icon {
             width: 100px;
             height: 100px;
-            margin: 10px;
+            margin: 15px;
+            border-radius: 5px;
+            /* Add margin for spacing between icons */
             cursor: pointer;
-            box-sizing: border-box; /* Include border within dimensions */
-            user-drag: none; /* Standard syntax */
-            -webkit-user-drag: none; /* Webkit browsers */
+            box-sizing: border-box;
+            user-drag: none;
+            -webkit-user-drag: none;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            /* Add transition for both margin and transform */
         }
 
         .selected {
-            box-shadow: 0 0 0 2px #ff4500; /* Darker border color when selected */
+            box-shadow: 0 0 5px 3px #aaa;
+            /* Darker border color when selected */
+            transform: scale(1.2);
+            /* Adjust the scale factor */
             box-sizing: border-box;
         }
+
 
         #selectedRadioName {
             text-align: center;
@@ -39,135 +54,140 @@
         }
 
         audio {
-            background-color: #282c35; /* Dark background for audio controls */
-            color: #fff; /* Light text color for audio controls */
+            background-color: #282c35;
+            /* Dark background for audio controls */
+            color: #fff;
+            /* Light text color for audio controls */
         }
     </style>
 </head>
+
 <body>
 
-<div id="radioList"></div>
+    <div id="radioList"></div>
 
-<br>
+    <br>
 
-<div id="selectedRadioName"></div>
+    <div id="selectedRadioName"></div>
 
-<audio controls id="radioPlayer">
-    <source src="" type="audio/mp3">
-    Your browser does not support the audio element.
-</audio>
+    <audio controls id="radioPlayer">
+        <source src="" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
 
-<script>
-    const radioPlayer = document.getElementById('radioPlayer');
-    const radioList = [
-        {
-            name: 'NIA Radio - Lofi',
-            image: 'Radio-NIA.png',
-            streamUrl: 'https://radio.nia.nc/radio/8020/lofi-hq-stream.aac'
-        },
-        {
-            name: 'Chillsky.com',
-            image: 'Radio-Chillsky.png',
-            streamUrl: 'https://lfhh.radioca.st/stream'
-        },
-        {
-            name: 'Chillout Radio',
-            image: 'Radio-chillout_ru.png',
-            streamUrl: 'https://api.chilloutradio.ru:8040/live'
-        },
-        {
-            name: 'BOX : Lofi Radio',
-            image: 'Radio-boxlofi.png',
-            streamUrl: 'https://boxradio-edge-05.streamafrica.net/lofi'
-        },
-        {
-            name: 'freeCodeCamp.org Code Radio',
-            image: 'Radio-FreeCodeCamp.png',
-            streamUrl: 'https://coderadio-admin.freecodecamp.org/radio/8010/radio.mp3'
-        },
-        {
-            name: '24/7 Lofi Radio',
-            image: 'Radio.png',
-            streamUrl: 'https://ec3.yesstreaming.net:3755/stream'
-        },
-        {
-            name: 'Sensual Lounge',
-            image: 'Radio-SensualLounge.png',
-            streamUrl: 'https://maggie.torontocast.com:8028/stream'
-        },
-        {
-            name: 'Радио Рекорд Lo-Fi',
-            image: 'Radio.png',
-            streamUrl: 'https://radio.garden/api/ara/content/listen/z3aOLSzU/channel.mp3'
-        },
-        {
-            name: 'NRJ - Lo-Fi',
-            image: 'Radio-NRJ-LoFi.jpg',
-            streamUrl: 'https://radio.garden/api/ara/content/listen/wYBoA74O/channel.mp3'
-        },
-        {
-            name: 'bigFM LoFi Focus',
-            image: 'Radio-BigFmLofi.jpg',
-            streamUrl: 'https://audiotainment-sw.streamabc.net/atsw-lofifocus-mp3-128-3757575'
-        },
-        {
-            name: 'Soma FM Lush',
-            image: 'Radio-SomaLush.png',
-            streamUrl: 'https://ice1.somafm.com/lush-128-mp3'
-        },
-        {
-            name: "Dr Dick's Dub Shack",
-            image: 'Radio.png',
-            streamUrl: 'http://radio.garden/api/ara/content/listen/mqdXmYNU/channel.mp3'
+    <script>
+        const radioPlayer = document.getElementById('radioPlayer');
+        const radioList = [
+            {
+                name: 'NIA Radio - Lofi',
+                image: 'Radio-NIA.png',
+                streamUrl: 'https://radio.nia.nc/radio/8020/lofi-hq-stream.aac'
+            },
+            {
+                name: 'Chillsky.com',
+                image: 'Radio-Chillsky.png',
+                streamUrl: 'https://lfhh.radioca.st/stream'
+            },
+            {
+                name: 'Chillout Radio',
+                image: 'Radio-chillout_ru.png',
+                streamUrl: 'https://api.chilloutradio.ru:8040/live'
+            },
+            {
+                name: 'BOX : Lofi Radio',
+                image: 'Radio-boxlofi.png',
+                streamUrl: 'https://boxradio-edge-05.streamafrica.net/lofi'
+            },
+            {
+                name: 'freeCodeCamp.org Code Radio',
+                image: 'Radio-FreeCodeCamp.png',
+                streamUrl: 'https://coderadio-admin.freecodecamp.org/radio/8010/radio.mp3'
+            },
+            {
+                name: '24/7 Lofi Radio',
+                image: 'Radio.png',
+                streamUrl: 'https://ec3.yesstreaming.net:3755/stream'
+            },
+            {
+                name: 'Sensual Lounge',
+                image: 'Radio-SensualLounge.png',
+                streamUrl: 'https://maggie.torontocast.com:8028/stream'
+            },
+            {
+                name: 'Радио Рекорд Lo-Fi',
+                image: 'Radio.png',
+                streamUrl: 'https://radio.garden/api/ara/content/listen/z3aOLSzU/channel.mp3'
+            },
+            {
+                name: 'NRJ - Lo-Fi',
+                image: 'Radio-NRJ-LoFi.jpg',
+                streamUrl: 'https://radio.garden/api/ara/content/listen/wYBoA74O/channel.mp3'
+            },
+            {
+                name: 'bigFM LoFi Focus',
+                image: 'Radio-BigFmLofi.jpg',
+                streamUrl: 'https://audiotainment-sw.streamabc.net/atsw-lofifocus-mp3-128-3757575'
+            },
+            {
+                name: 'Soma FM Lush',
+                image: 'Radio-SomaLush.png',
+                streamUrl: 'https://ice1.somafm.com/lush-128-mp3'
+            },
+            {
+                name: "Dr Dick's Dub Shack",
+                image: 'Radio.png',
+                streamUrl: 'http://radio.garden/api/ara/content/listen/mqdXmYNU/channel.mp3'
+            }
+            // Add other radio stations here
+        ];
+
+        // Display the selected radio name
+        const selectedRadioNameDiv = document.getElementById('selectedRadioName');
+
+        function changeChannel(index, icon) {
+            const icons = document.querySelectorAll('.radio-icon');
+            icons.forEach((icon) => {
+                icon.classList.remove('selected');
+            });
+
+            icon.classList.add('selected');
+
+            const selectedRadio = radioList[index];
+            selectedRadioNameDiv.textContent = selectedRadio.name;
+
+            // Check if the player is paused before changing the channel
+            if (radioPlayer.paused) {
+                radioPlayer.src = selectedRadio.streamUrl;
+            } else {
+                // If the player is playing, pause it first and then change the channel
+                radioPlayer.pause();
+                radioPlayer.src = selectedRadio.streamUrl;
+                radioPlayer.play();
+            }
         }
-        // Add other radio stations here
-    ];
 
-    // Display the selected radio name
-    const selectedRadioNameDiv = document.getElementById('selectedRadioName');
+        // Function to generate radio icons dynamically
+        function generateRadioIcons() {
+            const radioListDiv = document.getElementById('radioList');
 
-    function changeChannel(index, icon) {
-        const icons = document.querySelectorAll('.radio-icon');
-        icons.forEach((icon) => {
-            icon.classList.remove('selected');
-        });
+            radioList.forEach((radio, index) => {
+                const img = document.createElement('img');
+                img.src = radio.image;
+                img.alt = radio.name;
+                img.className = 'radio-icon';
+                img.title = radio.name; // Add title attribute for tooltip
+                img.style.backgroundColor = radio.tintColor;
+                img.onclick = () => changeChannel(index, img);
 
-        icon.classList.add('selected');
-
-        const selectedRadio = radioList[index];
-        selectedRadioNameDiv.textContent = selectedRadio.name;
-
-        // Check if the player is paused before changing the channel
-        if (radioPlayer.paused) {
-            radioPlayer.src = selectedRadio.streamUrl;
-        } else {
-            // If the player is playing, pause it first and then change the channel
-            radioPlayer.pause();
-            radioPlayer.src = selectedRadio.streamUrl;
-            radioPlayer.play();
+                radioListDiv.appendChild(img);
+            });
         }
-    }
 
-    // Function to generate radio icons dynamically
-    function generateRadioIcons() {
-        const radioListDiv = document.getElementById('radioList');
-
-        radioList.forEach((radio, index) => {
-            const img = document.createElement('img');
-            img.src = radio.image;
-            img.alt = radio.name;
-            img.className = 'radio-icon';
-            img.title = radio.name; // Add title attribute for tooltip
-            img.onclick = () => changeChannel(index, img);
-
-            radioListDiv.appendChild(img);
-        });
-    }
-
-    // Play the initial channel when the page loads
-    generateRadioIcons();
-    changeChannel(0, document.querySelector('.radio-icon'));
-</script>
+        // Play the initial channel when the page loads
+        generateRadioIcons();
+        changeChannel(0, document.querySelector('.radio-icon'));
+    </script>
 
 </body>
+
 </html>
