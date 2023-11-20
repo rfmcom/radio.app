@@ -23,8 +23,9 @@
             flex-direction: column;  /* Stack children vertically */
             align-items: center;  /* Center children horizontally */
             justify-content: center;  /* Center children vertically */
-            height: 100vh;  /* Use 100% of the viewport height */
+            min-height: 100vh;  /* Use 100% of the viewport height */
             margin: 0;  /* Remove default margin */
+            padding: 15px 0px
         }
 
         #radioList {
@@ -52,21 +53,17 @@
 
         #selectedRadioName {
             text-align: center;
-            margin-bottom: 10px;
+            margin: 10px 0px;
         }
 
         audio {
             background-color: #282c35;
-            /* Dark background for audio controls */
-            color: #fff;
-            /* Light text color for audio controls */
         }
     </style>
 </head>
 
 <body>
     <div id="radioList"></div>
-    <br>
     <div id="selectedRadioName"></div>
     <audio controls id="radioPlayer">
         <source src="" type="audio/mp3">
