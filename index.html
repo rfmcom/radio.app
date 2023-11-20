@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,20 +18,20 @@
             font-family: 'JetBrains Mono', monospace;
             background-color: #282c35;
             color: #eee;
-            display: flex;  /* Use flexbox for horizontal centering */
-            flex-direction: column;  /* Stack children vertically */
-            align-items: center;  /* Center children horizontally */
-            justify-content: center;  /* Center children vertically */
-            min-height: 100vh;  /* Use 100% of the viewport height */
-            margin: 0;  /* Remove default margin */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
             padding: 15px 0px
         }
 
         #radioList {
             display: flex;
-            flex-wrap: wrap; /* Allow icons to wrap to the next row */
-            justify-content: center; /* Center icons horizontally */
-            text-align: center; /* Center the text within the container */
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
         }
 
         .radio-icon {
@@ -43,12 +42,12 @@
             cursor: pointer;
             user-drag: none;
             -webkit-user-drag: none;
-            transition: transform 0.4s ease-in-out, box-shadow 0.2s ease-in-out;  /* Add transition for both shadow and transform */
+            transition: transform 0.4s ease-in-out, box-shadow 0.2s ease-in-out;
         }
 
         .selected {
             box-shadow: 0 0 5px 3px #aaa;
-            transform: scale(1.2);  /* Adjust the scale factor */
+            transform: scale(1.2);
         }
 
         #selectedRadioName {
@@ -60,6 +59,7 @@
             background-color: #282c35;
         }
     </style>
+
 </head>
 
 <body>
