@@ -164,6 +164,7 @@
             // Check if the player is paused before changing the channel
             if (radioPlayer.paused) {
                 radioPlayer.src = selectedRadio.streamUrl;
+                radioPlayer.play();
             } else {
                 // If the player is playing, pause it first and then change the channel
                 radioPlayer.pause();
