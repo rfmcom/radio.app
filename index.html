@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lofi Moai</title>
     <style>
-        @font-face {
+        @import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@400;900&display=block');
+        /* @font-face {
             font-family: 'JetBrains Mono';
             src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
                  url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff');
             font-weight: 400;
             font-style: normal;
             font-display: swap;
-        }
+        } */
 
         body {
-            font-family: 'JetBrains Mono', monospace;
+            /* font-family: 'JetBrains Mono', monospace; */
+            font-family: 'Sansita Swashed', cursive;
             background-color: #282c35;
             color: #eee;
             display: flex;
@@ -27,11 +29,11 @@
             padding: 15px 0px
         }
 
-        #Header {
-            text-align: center;
-            font-size: 24pt;
+        #header {
+            font-size: 48pt;
+            font-weight: 900;
             margin-bottom: 10;
-        } 
+        }
 
         #radioList {
             display: flex;
@@ -57,7 +59,8 @@
         }
 
         #selectedRadioName {
-            text-align: center;
+            font-size: 16pt;
+            font-weight: 400;
             margin: 10px 0px;
         }
 
@@ -69,7 +72,7 @@
 </head>
 
 <body>
-    <div id="header">lofi.moai</div>
+    <div id="header">lofi moai</div>
     <div id="radioList"></div>
     <div id="selectedRadioName"></div>
     <audio controls id="radioPlayer">
@@ -163,7 +166,7 @@
             icon.classList.add('selected');
 
             const selectedRadio = radioList[index];
-            selectedRadioNameDiv.textContent = selectedRadio.name + '';
+            selectedRadioNameDiv.textContent = selectedRadio.name.toLowerCase();
 
             // Save the selected index to localStorage
             localStorage.setItem('lastSelectedRadioIndex', index);
@@ -192,7 +195,7 @@
                 img.className = 'radio-icon';
                 if (index === initialSelectedIndex) {
                     img.classList.add('selected');
-                    selectedRadioNameDiv.textContent = radio.name;
+                    selectedRadioNameDiv.textContent = radio.name.toLowerCase();
                     // radioPlayer.src = radio.streamUrl;
                 }
                 img.onclick = () => changeChannel(index, img);
