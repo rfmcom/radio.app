@@ -1,0 +1,15 @@
+{
+    "name": "Lofi Moai",
+    "short_name": "Lofi Moai",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#282c35",
+    "theme_color": "#eeeeee",
+    "icons": [
+      {
+        "src": "lofi.png",
+        "sizes": "200x200",
+        "type": "image/png"
+      }
+    ]
+}
