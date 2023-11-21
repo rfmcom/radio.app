@@ -186,7 +186,7 @@
                 if (index === initialSelectedIndex) {
                     img.classList.add('selected');
                     selectedRadioNameDiv.textContent = radio.name;
-                    radioPlayer.src = radio.streamUrl;
+                    // radioPlayer.src = radio.streamUrl;
                 }
                 img.onclick = () => changeChannel(index, img);
                 radioListDiv.appendChild(img);
