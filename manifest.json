@@ -3,6 +3,7 @@
     "short_name": "Lofi Moai",
     "start_url": "/",
     "display": "standalone",
+    "orientation": "portrait",
     "background_color": "#282c35",
     "theme_color": "#282c35",
     "icons": [
