@@ -6,19 +6,20 @@
     <link rel="apple-touch-icon" href="lofi.png">
     <title>Lofi Moai</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@400;900&display=block');
-        /* @font-face {
+        @import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@900&display=block');
+
+        @font-face {
             font-family: 'JetBrains Mono';
             src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
                  url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff');
             font-weight: 400;
             font-style: normal;
-            font-display: swap;
-        } */
+            font-display: block;
+        }
 
         body {
-            /* font-family: 'JetBrains Mono', monospace; */
-            font-family: 'Sansita Swashed', cursive;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 400;
             background-color: #282c35;
             color: #eeeeee;
             display: flex;
@@ -31,8 +32,9 @@
         }
 
         #header {
-            font-size: 48pt;
+            font-family: 'Sansita Swashed', cursive;
             font-weight: 900;
+            font-size: 48pt;
             margin-bottom: 15px;
         }
 
@@ -60,7 +62,7 @@
         }
 
         #selectedRadioName {
-            font-size: 16pt;
+            font-size: 14pt;
             font-weight: 400;
             margin: 10px 0px;
         }
@@ -167,7 +169,7 @@
             icon.classList.add('selected');
 
             const selectedRadio = radioList[index];
-            selectedRadioNameDiv.textContent = selectedRadio.name.toLowerCase();
+            selectedRadioNameDiv.textContent = selectedRadio.name;
 
             // Save the selected index to localStorage
             localStorage.setItem('lastSelectedRadioIndex', index);
@@ -196,7 +198,7 @@
                 img.className = 'radio-icon';
                 if (index === initialSelectedIndex) {
                     img.classList.add('selected');
-                    selectedRadioNameDiv.textContent = radio.name.toLowerCase();
+                    selectedRadioNameDiv.textContent = radio.name;
                     // radioPlayer.src = radio.streamUrl;
                 }
                 img.onclick = () => changeChannel(index, img);
