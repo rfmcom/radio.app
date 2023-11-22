@@ -8,7 +8,7 @@
     "theme_color": "#282c35",
     "icons": [
       {
-        "src": "lofi.png",
+        "src": "img/lofi.png",
         "sizes": "200x200",
         "type": "image/png"
       }

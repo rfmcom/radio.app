@@ -92,6 +92,10 @@
         <source src="" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
+    <a href="https://github.com/4itor/lofi.moai.link" target="_blank" style="position: fixed; bottom: 10px; right: 15px; z-index: 1000;">
+        <img src="img/github-mark-white.png" alt="GitHub" style="width: 23px; height: 22.5px; filter: grayscale(100%) opacity(0.5);">
+    </a>
+
 
     <script>
         const radioPlayer = document.getElementById('radioPlayer');
@@ -158,16 +162,13 @@
                 streamUrl: 'http://radio.garden/api/ara/content/listen/mqdXmYNU/channel.mp3'
             }
             // Add other radio stations here
+            // ...
         ];
 
         // Retrieve the last selected radio index from localStorage
         const lastSelectedRadioIndex = localStorage.getItem('lastSelectedRadioIndex');
         //console.log('localStorage radio index:', lastSelectedRadioIndex);
-
-        // Set the initial selected index to the last selected index or 0 if none is found
         const initialSelectedIndex = lastSelectedRadioIndex !== null ? parseInt(lastSelectedRadioIndex, 10) : 0;
-
-        // Display the selected radio name
         const selectedRadioNameDiv = document.getElementById('selectedRadioName');
 
         let currentIndex = initialSelectedIndex;
@@ -194,7 +195,7 @@
             localStorage.setItem('lastSelectedRadioIndex', newIndex);
 
             radioPlayer.src = selectedRadio.streamUrl;
-            playRadio();
+            radioPlayer.play();
 
             currentIndex = newIndex;
         }
@@ -205,7 +206,7 @@
 
             radioList.forEach((radio, index) => {
                 const img = document.createElement('img');
-                img.src = radio.image;
+                img.src = 'img/' + radio.image;
                 img.alt = radio.name;
                 img.title = radio.name;
                 img.className = 'radio-icon';
@@ -226,33 +227,32 @@
             if (radioPlayer.readyState === 4) {
                 document.getElementById('radioList').style.setProperty('--selected', 'var(--playing)');
             } else {
-                // Cambiar el valor de la variable CSS para todos los radio-icon en radioList mientras se carga
                 document.getElementById('radioList').style.setProperty('--selected', 'var(--buffering)');
             }
-
-            // Agregar el evento canplay para restaurar el valor de la variable CSS cuando la música realmente comienza a sonar
             radioPlayer.addEventListener('canplay', () => {
                 document.getElementById('radioList').style.setProperty('--selected', 'var(--playing)');
             });
         });
 
         radioPlayer.addEventListener('pause', () => {
-            // Restaurar el valor de la variable CSS para todos los radio-icon en radioList cuando se pausa
             document.getElementById('radioList').style.removeProperty('--selected');
         });
 
         radioPlayer.addEventListener('ended', () => {
-            // Restaurar el valor de la variable CSS para todos los radio-icon en radioList cuando termina la reproducción
             document.getElementById('radioList').style.removeProperty('--selected');
         });
 
         document.addEventListener('keydown', function (event) {
             switch (event.key) {
                 case ' ':
-                    togglePlayPause();
+                    if (radioPlayer.paused) {
+                        radioPlayer.play();
+                    } else {
+                        radioPlayer.pause();
+                    }
                     break;
                 case 'p':
-                    pauseRadio();
+                    radioPlayer.pause();
                     break;
                 case 'h':
                 case 'ArrowLeft':
@@ -264,22 +264,6 @@
                     break;
             }
         });
-
-        function togglePlayPause() {
-            if (radioPlayer.paused) {
-                playRadio();
-            } else {
-                pauseRadio();
-            }
-        }
-
-        function playRadio() {
-            radioPlayer.play();
-        }
-
-        function pauseRadio() {
-            radioPlayer.pause();
-        }
 
     </script>
 
