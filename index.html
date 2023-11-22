@@ -221,8 +221,7 @@
         generateRadioIcons();
 
         radioPlayer.addEventListener('play', () => {
-            // Verificar si el contenido está listo para reproducirse (readyState 4 significa que está listo)
-            if (radioPlayer.readyState === 4) {
+            if (radioPlayer.readyState >= 3) {
                 document.getElementById('radioList').style.setProperty('--selected', 'var(--playing)');
             } else {
                 document.getElementById('radioList').style.setProperty('--selected', 'var(--buffering)');
