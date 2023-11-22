@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ca">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +13,15 @@
         @font-face {
             font-family: 'JetBrains Mono';
             src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2'),
-                 url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff');
+                url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff/JetBrainsMono-Regular.woff') format('woff');
             font-weight: 400;
             font-style: normal;
             font-display: block;
+        }
+
+        :root {
+            --selected: #aaaaaa;
+            --playing: #44dd88;
         }
 
         body {
@@ -59,7 +65,7 @@
         }
 
         .selected {
-            box-shadow: 0 0 5px 3px #aaa;
+            box-shadow: 0 0 5px 3px var(--selected);
             transform: scale(1.2);
         }
 
@@ -163,30 +169,33 @@
         // Display the selected radio name
         const selectedRadioNameDiv = document.getElementById('selectedRadioName');
 
-        function changeChannel(index, icon) {
-            const icons = document.querySelectorAll('.radio-icon');
-            icons.forEach((icon) => {
-                icon.classList.remove('selected');
+        let currentIndex = initialSelectedIndex;
+
+        function changeChannel(index) {
+            const icons = document.querySelectorAll('.radio-icon.selected');
+            const isSelected = icons.length > 0;
+
+            if (isSelected && !radioPlayer.paused) {
+                pauseRadio();
+            }
+
+            icons.forEach((oldicon) => {
+                oldicon.classList.remove('selected');
             });
 
-            icon.classList.add('selected');
+            const newIndex = (index + radioList.length) % radioList.length;
+            const newIcon = document.querySelectorAll('.radio-icon')[newIndex];
+            newIcon.classList.add('selected');
 
-            const selectedRadio = radioList[index];
+            const selectedRadio = radioList[newIndex];
             selectedRadioNameDiv.textContent = selectedRadio.name;
 
-            // Save the selected index to localStorage
-            localStorage.setItem('lastSelectedRadioIndex', index);
+            localStorage.setItem('lastSelectedRadioIndex', newIndex);
 
-            // Check if the player is paused before changing the channel
-            if (radioPlayer.paused) {
-                radioPlayer.src = selectedRadio.streamUrl;
-                radioPlayer.play();
-            } else {
-                // If the player is playing, pause it first and then change the channel
-                radioPlayer.pause();
-                radioPlayer.src = selectedRadio.streamUrl;
-                radioPlayer.play();
-            }
+            radioPlayer.src = selectedRadio.streamUrl;
+            playRadio();
+
+            currentIndex = newIndex;
         }
 
         // Function to generate radio icons dynamically
@@ -202,16 +211,68 @@
                 if (index === initialSelectedIndex) {
                     img.classList.add('selected');
                     selectedRadioNameDiv.textContent = radio.name;
-                    // radioPlayer.src = radio.streamUrl;
                 }
-                img.onclick = () => changeChannel(index, img);
+                img.onclick = () => changeChannel(index);
                 radioListDiv.appendChild(img);
             });
         }
 
         // Play the initial channel when the page loads
         generateRadioIcons();
+
+        // Agregar oyentes de eventos al reproductor de audioc
+        radioPlayer.addEventListener('play', () => {
+            // Cambiar el valor de la variable CSS para todos los radio-icon en radioList cuando se reproduce
+            document.getElementById('radioList').style.setProperty('--selected', 'var(--playing)');
+        });
+
+        radioPlayer.addEventListener('pause', () => {
+            // Restaurar el valor de la variable CSS para todos los radio-icon en radioList cuando se pausa
+            document.getElementById('radioList').style.removeProperty('--selected');
+        });
+
+        radioPlayer.addEventListener('ended', () => {
+            // Restaurar el valor de la variable CSS para todos los radio-icon en radioList cuando termina la reproducción
+            document.getElementById('radioList').style.removeProperty('--selected');
+        });
+
+        document.addEventListener('keydown', function (event) {
+            switch (event.key) {
+                case ' ':
+                    togglePlayPause();
+                    break;
+                case 'p':
+                    pauseRadio();
+                    break;
+                case 'j':
+                case 'ArrowLeft':
+                    changeChannel(currentIndex - 1);
+                    break;
+                case 'k':
+                case 'ArrowRight':
+                    changeChannel(currentIndex + 1);
+                    break;
+            }
+        });
+
+        function togglePlayPause() {
+            if (radioPlayer.paused) {
+                playRadio();
+            } else {
+                pauseRadio();
+            }
+        }
+
+        function playRadio() {
+            radioPlayer.play();
+        }
+
+        function pauseRadio() {
+            radioPlayer.pause();
+        }
+
     </script>
 
 </body>
+
 </html>
