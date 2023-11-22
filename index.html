@@ -92,7 +92,8 @@
         <source src="" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
-    <a href="https://github.com/4itor/lofi.moai.link" target="_blank" style="position: fixed; bottom: 10px; right: 15px; z-index: 1000;">
+    <a href="https://github.com/4itor/lofi.moai.link" target="_blank"
+        style="position: fixed; bottom: 10px; right: 15px; z-index: 1000;">
         <img src="img/github-mark-white.png" alt="GitHub" style="width: 23px; height: 22.5px; filter: opacity(0.5);">
     </a>
 
@@ -174,19 +175,19 @@
         let currentIndex = initialSelectedIndex;
 
         function changeChannel(index) {
-            const icons = document.querySelectorAll('.radio-icon.selected');
-            const isSelected = icons.length > 0;
+            const icons = document.querySelectorAll('.radio-icon');
+            const isSelected = icons[index].classList.contains('selected');
 
             if (isSelected && !radioPlayer.paused) {
-                pauseRadio();
+                radioPlayer.pause();
             }
 
-            icons.forEach((oldicon) => {
-                oldicon.classList.remove('selected');
+            icons.forEach((icon) => {
+                icon.classList.remove('selected');
             });
 
             const newIndex = (index + radioList.length) % radioList.length;
-            const newIcon = document.querySelectorAll('.radio-icon')[newIndex];
+            const newIcon = icons[newIndex];
             newIcon.classList.add('selected');
 
             const selectedRadio = radioList[newIndex];
