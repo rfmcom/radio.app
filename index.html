@@ -22,6 +22,7 @@
         :root {
             --selected: #aaaaaa;
             --playing: #44dd88;
+            --buffering: #dddd44;
         }
 
         body {
@@ -220,10 +221,19 @@
         // Play the initial channel when the page loads
         generateRadioIcons();
 
-        // Agregar oyentes de eventos al reproductor de audioc
         radioPlayer.addEventListener('play', () => {
-            // Cambiar el valor de la variable CSS para todos los radio-icon en radioList cuando se reproduce
-            document.getElementById('radioList').style.setProperty('--selected', 'var(--playing)');
+            // Verificar si el contenido está listo para reproducirse (readyState 4 significa que está listo)
+            if (radioPlayer.readyState === 4) {
+                document.getElementById('radioList').style.setProperty('--selected', 'var(--playing)');
+            } else {
+                // Cambiar el valor de la variable CSS para todos los radio-icon en radioList mientras se carga
+                document.getElementById('radioList').style.setProperty('--selected', 'var(--buffering)');
+            }
+
+            // Agregar el evento canplay para restaurar el valor de la variable CSS cuando la música realmente comienza a sonar
+            radioPlayer.addEventListener('canplay', () => {
+                document.getElementById('radioList').style.setProperty('--selected', 'var(--playing)');
+            });
         });
 
         radioPlayer.addEventListener('pause', () => {
@@ -244,11 +254,11 @@
                 case 'p':
                     pauseRadio();
                     break;
-                case 'j':
+                case 'h':
                 case 'ArrowLeft':
                     changeChannel(currentIndex - 1);
                     break;
-                case 'k':
+                case 'l':
                 case 'ArrowRight':
                     changeChannel(currentIndex + 1);
                     break;
