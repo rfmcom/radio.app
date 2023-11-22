@@ -73,7 +73,22 @@
         #selectedRadioName {
             font-size: 14pt;
             font-weight: 400;
-            margin: 30px 0px;
+            margin-top: 30px;
+            margin-bottom: 5px;
+        }
+
+        #selectedRadioLocation {
+            font-size: 11pt;
+            /* font-style: italic; */
+            font-weight: 400;
+            margin: 5px 0px;
+        }
+
+        #selectedRadioInfo {
+            font-size: 18pt;
+            font-weight: 400;
+            margin-top: 5px;
+            margin-bottom: 30px;
         }
 
         audio {
@@ -87,7 +102,9 @@
 <body>
     <div id="header">lofi moai</div>
     <div id="radioList"></div>
-    <div id="selectedRadioName"></div>
+    <div id="selectedRadioName">&nbsp;</div>
+    <div id="selectedRadioLocation">&nbsp;</div>
+    <div id="selectedRadioInfo">&nbsp;</div>
     <audio id="radioPlayer">
         <source src="" type="audio/mp3">
         Your browser does not support the audio element.
@@ -97,82 +114,128 @@
         <img src="img/github-mark-white.png" alt="GitHub" style="width: 23px; height: 22.5px; filter: opacity(0.5);">
     </a>
 
-
     <script>
         const radioPlayer = document.getElementById('radioPlayer');
         const radioList = [
             {
                 name: 'NIA Radio - Lofi',
                 image: 'Radio-NIA.png',
+                infoUrl: 'https://nia.nc/',
+                infoLocation: 'Nouméa, New Calédonia',
                 streamUrl: 'https://radio.nia.nc/radio/8020/lofi-hq-stream.aac'
             },
             {
                 name: 'Chillsky.com',
                 image: 'Radio-Chillsky.png',
                 infoUrl: 'https://chillsky.com',
+                infoLocation: 'London, United Kingdom',
                 streamUrl: 'https://lfhh.radioca.st/stream'
             },
             {
                 name: 'Chillout Radio',
                 image: 'Radio-chillout_ru.png',
+                infoUrl: 'https://chilloutradio.ru/',
+                infoLocation: 'Moscow, Russia',
                 streamUrl: 'https://api.chilloutradio.ru:8040/live'
             },
             {
                 name: 'BOX : Lofi Radio',
                 image: 'Radio-boxlofi.png',
+                infoUrl: 'https://boxradio.net/',
+                infoLocation: 'London, United Kingdom',
                 streamUrl: 'https://boxradio-edge-05.streamafrica.net/lofi'
             },
             {
                 name: 'freeCodeCamp.org Code Radio',
                 image: 'Radio-FreeCodeCamp.png',
+                infoUrl: 'https://coderadio.freecodecamp.org/',
+                infoLocation: 'San Francisco, CA, United States',
                 streamUrl: 'https://coderadio-admin.freecodecamp.org/radio/8010/radio.mp3'
             },
             {
                 name: '24/7 Lofi Radio',
                 image: 'Radio-247Lofi.jpeg',
+                infoUrl: 'https://www.247lofiradio.com/',
+                infoLocation: 'London, United Kingdom',
                 streamUrl: 'https://ec3.yesstreaming.net:3755/stream'
             },
             {
                 name: 'Sensual Lounge',
                 image: 'Radio-SensualLounge.png',
+                infoUrl: 'https://maggie.torontocast.com:2020/public/sensuallounge',
+                infoLocation: 'Toronto, Canada',
                 streamUrl: 'https://maggie.torontocast.com:8028/stream'
             },
             {
                 name: 'Радио Рекорд Lo-Fi',
                 image: 'Radio-RecordLofi.jpeg',
+                infoUrl: 'https://www.radiorecord.ru/station/lofi',
+                infoLocation: 'St. Petesburg, Russia',
                 streamUrl: 'https://radio.garden/api/ara/content/listen/z3aOLSzU/channel.mp3'
             },
             {
                 name: 'NRJ - Lo-Fi',
                 image: 'Radio-NRJ-LoFi.jpg',
+                infoUrl: 'https://www.nrj.fr/webradios/mur-des-radios/nrj-lo-fi',
+                infoLocation: 'Paris, France',
                 streamUrl: 'https://radio.garden/api/ara/content/listen/wYBoA74O/channel.mp3'
             },
             {
                 name: 'bigFM LoFi Focus',
                 image: 'Radio-BigFmLofi.jpg',
+                infoUrl: 'https://www.bigfm.de/',
+                infoLocation: 'Stuttgart, Deutschland',
                 streamUrl: 'https://audiotainment-sw.streamabc.net/atsw-lofifocus-mp3-128-3757575'
             },
             {
                 name: 'Soma FM Lush',
                 image: 'Radio-SomaLush.png',
+                infoUrl: 'https://somafm.com/lush/',
+                infoLocation: 'San Francisco, CA, United States',
                 streamUrl: 'https://ice1.somafm.com/lush-128-mp3'
             },
             {
                 name: "Dr Dick's Dub Shack",
                 image: 'Radio-DubShack.png',
+                infoUrl: 'https://drdicksdubshack.com/',
+                infoLocation: 'Hamilton, Bermuda',
                 streamUrl: 'http://radio.garden/api/ara/content/listen/mqdXmYNU/channel.mp3'
             }
-            // Add other radio stations here
-            // ...
         ];
 
         // Retrieve the last selected radio index from localStorage
         const lastSelectedRadioIndex = localStorage.getItem('lastSelectedRadioIndex');
-        //console.log('localStorage radio index:', lastSelectedRadioIndex);
         const initialSelectedIndex = lastSelectedRadioIndex !== null ? parseInt(lastSelectedRadioIndex, 10) : 0;
-        const selectedRadioNameDiv = document.getElementById('selectedRadioName');
-
         let currentIndex = initialSelectedIndex;
+
+        // Global objects to update radio information
+        const selectedRadioNameDiv = document.getElementById('selectedRadioName');
+        const selectedRadioLocationDiv = document.getElementById('selectedRadioLocation');
+        const selectedRadioInfoDiv = document.getElementById('selectedRadioInfo');
+
+        function updateRadioInfo(index) {
+            // Radio Name
+            selectedRadioNameDiv.textContent = radioList[index].name;
+            // Radio Location
+            if (radioList[index].infoLocation) {
+                selectedRadioLocationDiv.textContent = radioList[index].infoLocation;
+            } else {
+                selectedRadioLocationDiv.textContent = '~';
+            }
+            // Radio URL
+            if (radioList[index].infoUrl) {
+                selectedRadioInfoDiv.innerHTML = '';  // Limpiar contenido existente
+                const infoLink = document.createElement('a');
+                infoLink.href = radioList[index].infoUrl;
+                infoLink.textContent = '🌐';
+                infoLink.target = '_blank';
+                infoLink.style.textDecoration = 'none';  // Desactivar subrayado
+                infoLink.style.color = 'inherit';  // Mantener el color predeterminado
+                selectedRadioInfoDiv.appendChild(infoLink);
+            } else {
+                selectedRadioInfoDiv.innerHTML = '&nbsp;';
+            }
+        }
 
         function changeChannel(index) {
             const icons = document.querySelectorAll('.radio-icon');
@@ -181,6 +244,7 @@
 
             if (isSelected && !radioPlayer.paused) {
                 radioPlayer.pause();
+                return;
             }
 
             icons.forEach((icon) => {
@@ -189,7 +253,7 @@
 
             icons[index].classList.add('selected');
 
-            selectedRadioNameDiv.textContent = radioList[index].name;
+            updateRadioInfo(index);
 
             localStorage.setItem('lastSelectedRadioIndex', index);
 
@@ -211,7 +275,7 @@
                 img.className = 'radio-icon';
                 if (index === initialSelectedIndex) {
                     img.classList.add('selected');
-                    selectedRadioNameDiv.textContent = radio.name;
+                    updateRadioInfo(index);
                 }
                 img.onclick = () => changeChannel(index);
                 radioListDiv.appendChild(img);
