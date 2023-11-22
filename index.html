@@ -177,6 +177,7 @@
         function changeChannel(index) {
             const icons = document.querySelectorAll('.radio-icon');
             const isSelected = icons[index].classList.contains('selected');
+            index %= icons.length;
 
             if (isSelected && !radioPlayer.paused) {
                 radioPlayer.pause();
@@ -186,19 +187,16 @@
                 icon.classList.remove('selected');
             });
 
-            const newIndex = (index + radioList.length) % radioList.length;
-            const newIcon = icons[newIndex];
-            newIcon.classList.add('selected');
+            icons[index].classList.add('selected');
 
-            const selectedRadio = radioList[newIndex];
-            selectedRadioNameDiv.textContent = selectedRadio.name;
+            selectedRadioNameDiv.textContent = radioList[index].name;
 
-            localStorage.setItem('lastSelectedRadioIndex', newIndex);
+            localStorage.setItem('lastSelectedRadioIndex', index);
 
-            radioPlayer.src = selectedRadio.streamUrl;
+            radioPlayer.src = radioList[index].streamUrl;
             radioPlayer.play();
 
-            currentIndex = newIndex;
+            currentIndex = index;
         }
 
         // Function to generate radio icons dynamically
@@ -220,7 +218,6 @@
             });
         }
 
-        // Play the initial channel when the page loads
         generateRadioIcons();
 
         radioPlayer.addEventListener('play', () => {
