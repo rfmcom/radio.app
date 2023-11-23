@@ -1,16 +1,23 @@
 {
-    "name": "lofi moai",
-    "short_name": "lofi moai",
-    "start_url": "/",
-    "display": "standalone",
-    "orientation": "portrait",
-    "background_color": "#282c35",
-    "theme_color": "#282c35",
-    "icons": [
-      {
-        "src": "img/lofi.png",
-        "sizes": "200x200",
-        "type": "image/png"
-      }
-    ]
+  "name": "lofi moai",
+  "short_name": "lofi moai",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#282c35",
+  "theme_color": "#282c35",
+  "icons": [
+    {
+      "src": "img/icons/maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "img/icons/general.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
 }
