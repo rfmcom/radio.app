@@ -1,6 +1,6 @@
 {
-  "name": "lofi moai",
-  "short_name": "lofi moai",
+  "name": "raddio.app",
+  "short_name": "raddio.app",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
