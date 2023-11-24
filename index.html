@@ -271,6 +271,9 @@
         }
 
         function changeChannel(index) {
+            // Cyclic index
+            index = ( index < 0 ? radioList.length - 1 : index % radioList.length)
+
             const icons = document.querySelectorAll('.radio-icon');
             const isSelected = icons[index].classList.contains('selected');
             index %= icons.length;
