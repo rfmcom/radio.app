@@ -26,6 +26,7 @@
             --selected: #aaaaaa;
             --playing: #44dd88;
             --buffering: #dddd44;
+            --error: #dd6666;
         }
 
         body {
@@ -226,6 +227,7 @@
         const selectedRadioNameDiv = document.getElementById('selectedRadioName');
         const selectedRadioLocationDiv = document.getElementById('selectedRadioLocation');
         const selectedRadioInfoDiv = document.getElementById('selectedRadioInfo');
+        const radioListDiv = document.getElementById('radioList');
 
         function updateRadioInfo(index) {
             // Radio Name
@@ -272,7 +274,7 @@
 
         function changeChannel(index) {
             // Cyclic index
-            index = ( index < 0 ? radioList.length - 1 : index % radioList.length)
+            index = (index < 0 ? radioList.length - 1 : index % radioList.length)
 
             const icons = document.querySelectorAll('.radio-icon');
             const isSelected = icons[index].classList.contains('selected');
@@ -301,7 +303,6 @@
 
         // Function to generate radio icons dynamically
         function generateRadioIcons() {
-            const radioListDiv = document.getElementById('radioList');
 
             radioList.forEach((radio, index) => {
                 const img = document.createElement('img');
@@ -320,24 +321,42 @@
 
         generateRadioIcons();
 
+        // *** Event listeners for radio player ***
+
         radioPlayer.addEventListener('play', () => {
             if (radioPlayer.readyState >= 3) {
-                document.getElementById('radioList').style.setProperty('--selected', 'var(--playing)');
+                radioListDiv.style.setProperty('--selected', 'var(--playing)');
             } else {
-                document.getElementById('radioList').style.setProperty('--selected', 'var(--buffering)');
+                radioListDiv.style.setProperty('--selected', 'var(--buffering)');
             }
             radioPlayer.addEventListener('canplay', () => {
-                document.getElementById('radioList').style.setProperty('--selected', 'var(--playing)');
+                radioListDiv.style.setProperty('--selected', 'var(--playing)');
             });
         });
 
         radioPlayer.addEventListener('pause', () => {
-            document.getElementById('radioList').style.removeProperty('--selected');
+            if(radioPlayer.error) {
+                radioListDiv.style.setProperty('--selected', 'var(--error)');
+            } else {
+                radioListDiv.style.removeProperty('--selected');
+            }
         });
 
         radioPlayer.addEventListener('ended', () => {
-            document.getElementById('radioList').style.removeProperty('--selected');
+            if(radioPlayer.error) {
+                radioListDiv.style.setProperty('--selected', 'var(--error)');
+            } else {
+                radioListDiv.style.removeProperty('--selected');
+            }
         });
+
+        radioPlayer.addEventListener('error', (event) => {
+            const errorCode = event.target.error.code;
+            console.error('Error during audio playback:', errorCode);
+            radioListDiv.style.setProperty('--selected', 'var(--error)');
+        });
+
+        // *** Event listeners for keyboard shortcuts ***
 
         document.addEventListener('keydown', function (event) {
             switch (event.key) {
