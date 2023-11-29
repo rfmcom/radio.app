@@ -276,10 +276,12 @@
             // Cyclic index
             index = (index < 0 ? radioList.length - 1 : index % radioList.length)
 
+
             const icons = document.querySelectorAll('.radio-icon');
             const isSelected = icons[index].classList.contains('selected');
+            const isPlaying = !radioPlayer.paused;
 
-            if (isSelected && !radioPlayer.paused) {
+            if (isSelected && isPlaying) {
                 radioPlayer.pause();
                 return;
             }
@@ -296,7 +298,7 @@
 
             radioPlayer.src = radioList[index].streamUrl;
 
-            if (forcePlay) {
+            if (forcePlay || isPlaying) {
                 radioPlayer.play();
             }
 
@@ -332,12 +334,14 @@
                 radioListDiv.style.setProperty('--selected', 'var(--buffering)');
             }
             radioPlayer.addEventListener('canplay', () => {
-                radioListDiv.style.setProperty('--selected', 'var(--playing)');
+                if (!radioPlayer.paused) {
+                    radioListDiv.style.setProperty('--selected', 'var(--playing)');
+                }
             });
         });
 
         radioPlayer.addEventListener('pause', () => {
-            if(radioPlayer.error) {
+            if (radioPlayer.error) {
                 radioListDiv.style.setProperty('--selected', 'var(--error)');
             } else {
                 radioListDiv.style.removeProperty('--selected');
@@ -345,7 +349,7 @@
         });
 
         radioPlayer.addEventListener('ended', () => {
-            if(radioPlayer.error) {
+            if (radioPlayer.error) {
                 radioListDiv.style.setProperty('--selected', 'var(--error)');
             } else {
                 radioListDiv.style.removeProperty('--selected');
