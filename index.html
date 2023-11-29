@@ -276,7 +276,6 @@
             // Cyclic index
             index = (index < 0 ? radioList.length - 1 : index % radioList.length)
 
-
             const icons = document.querySelectorAll('.radio-icon');
             const isSelected = icons[index].classList.contains('selected');
             const isPlaying = !radioPlayer.paused;
@@ -286,23 +285,30 @@
                 return;
             }
 
+            // Si estamos en modo error desactivamos el color error.
+            if (radioListDiv.style.getPropertyValue('--selected').trim() === 'var(--error)') {
+                radioListDiv.style.removeProperty('--selected');
+            }
+
+            // Marcamos la clase selected en el icono seleccionado, quitamos del resto.
             icons.forEach((icon) => {
                 icon.classList.remove('selected');
             });
-
             icons[index].classList.add('selected');
 
+            // Guardar en LocalStorage el último índice seleccionado.
+            currentIndex = index;
+            localStorage.setItem('lastSelectedRadioIndex', currentIndex);
+
+            // Actualizar información de la radio seleccionada.
             updateRadioInfo(index);
 
-            localStorage.setItem('lastSelectedRadioIndex', index);
-
+            // Cambiar la URL del reproductor y iniciar la reproducción si procede.
             radioPlayer.src = radioList[index].streamUrl;
-
             if (forcePlay || isPlaying) {
                 radioPlayer.play();
             }
 
-            currentIndex = index;
         }
 
         // Function to generate radio icons dynamically
