@@ -382,6 +382,11 @@
                 case 'ArrowRight':
                     changeChannel(currentIndex + 1);
                     break;
+                case 'w':
+                    if (radioList[currentIndex].infoUrl) {
+                        window.open(radioList[currentIndex].infoUrl, '_blank');
+                    }
+                    break;
                 case '1':
                 case '2':
                 case '3':
