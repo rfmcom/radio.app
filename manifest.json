@@ -3,9 +3,10 @@
   "short_name": "raddio.app",
   "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait",
+  "orientation": "any",
   "background_color": "#282c35",
   "theme_color": "#282c35",
+  "description": "A simple radio app for the web",
   "icons": [
     {
       "src": "img/icons/maskable.png",
@@ -19,5 +20,8 @@
       "type": "image/png",
       "purpose": "any"
     }
-  ]
+  ],
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  }
 }
