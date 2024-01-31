@@ -340,9 +340,8 @@
                 const img = document.createElement('img');
                 if ((radio.image === undefined) || (radio.image === '')) {
                     radio.image = 'default.png';
-                } else {
-                    img.src = 'img/' + radio.image;
                 }
+                img.src = 'img/' + radio.image;
                 img.alt = radio.name;
                 img.title = radio.name;
                 img.className = 'radio-icon';
