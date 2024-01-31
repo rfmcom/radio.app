@@ -113,10 +113,12 @@
         const pageTitle = document.getElementById('header');
         const queryParams = new URLSearchParams(window.location.search);
         const RadioSet = Array.from(queryParams.keys())[0];
+        let radioList = [];
+        let RadioTitle = 'lofi moai';
 
         if (RadioSet === undefined) {
             const radioTitle = 'lofi moai';
-            const radioList = [
+            radioList = [
                 {
                     name: 'NIA Radio - Lofi',
                     image: 'Radio-NIA.png',
@@ -218,7 +220,7 @@
             console.log(RadioSet);
             if (RadioSet === 'freshneda') {
                 radioTitle = 'freshneda';
-                const radioList = [
+                radioList = [
                     {
                         name: 'NIA Radio - Lofi',
                         image: 'Radio-NIA.png',
