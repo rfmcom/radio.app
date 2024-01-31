@@ -114,10 +114,9 @@
         const queryParams = new URLSearchParams(window.location.search);
         const RadioSet = Array.from(queryParams.keys())[0];
         let radioList = [];
-        let RadioTitle = 'lofi moai';
+        let radioTitle = 'lofi moai';
 
         if (RadioSet === undefined) {
-            const radioTitle = 'lofi moai';
             radioList = [
                 {
                     name: 'NIA Radio - Lofi',
