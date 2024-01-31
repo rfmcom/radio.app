@@ -221,14 +221,21 @@
                 radioTitle = 'freshneda';
                 radioList = [
                     {
-                        name: 'NIA Radio - Lofi',
-                        image: 'Radio-NIA.png',
-                        infoUrl: 'https://nia.nc/',
-                        infoLocation: 'Nouméa, New Calédonia',
-                        infoFlag: 'nc',
-                        streamUrl: 'https://radio.nia.nc/radio/8020/lofi-hq-stream.aac'
+                        name: 'Electro Dancefloor',
+                        infoUrl: 'http://electrodancefloor.fr.mu/',
+                        infoLocation: 'Tourcoing, France',
+                        infoFlag: 'fr',
+                        streamUrl: 'https://listen.openstream.co/2679/audio'
+                    },
+                    {
+                        name: 'Electronica Vibes',
+                        image: '',
+                        infoUrl: 'https://piratefm.net/electronica-vibes-pirate-radio-gr/',
+                        infoLocation: 'Chios, Greece',
+                        infoFlag: 'gr',
+                        streamUrl: 'https://live.piratefm.net/electronica_vibes'
                     }
-                ]
+                ];
             }
         }
         pageTitle.textContent = radioTitle;
@@ -331,7 +338,11 @@
             console.log(radioList);
             radioList.forEach((radio, index) => {
                 const img = document.createElement('img');
-                img.src = 'img/' + radio.image;
+                if ((radio.image === undefined) || (radio.image === '')) {
+                    radio.image = 'default.png';
+                } else {
+                    img.src = 'img/' + radio.image;
+                }
                 img.alt = radio.name;
                 img.title = radio.name;
                 img.className = 'radio-icon';
