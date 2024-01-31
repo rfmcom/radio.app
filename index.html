@@ -110,6 +110,10 @@
 
     <script>
         const radioPlayer = document.getElementById('radioPlayer');
+        const queryParams = new URLSearchParams(window.location.search);
+        const firstParamKey = Array.from(queryParams.keys())[0];
+
+        if (firstParamKey === undefined) {
         const radioList = [
             {
                 name: 'NIA Radio - Lofi',
@@ -208,6 +212,9 @@
                 streamUrl: 'http://radio.garden/api/ara/content/listen/mqdXmYNU/channel.mp3'
             }
         ];
+        } else {
+            console.log(firstParamKey);
+        }
 
         // Retrieve the last selected radio index from localStorage
         const lastSelectedRadioIndex = localStorage.getItem('lastSelectedRadioIndex');
