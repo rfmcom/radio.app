@@ -1,6 +1,6 @@
 {
-  "name": "raddio.app",
-  "short_name": "raddio.app",
+  "name": "radio.app",
+  "short_name": "radio.app",
   "start_url": "/",
   "display": "standalone",
   "orientation": "any",
