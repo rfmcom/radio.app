@@ -1,7 +1,7 @@
 {
   "name": "radio.app",
   "short_name": "radio.app",
-  "start_url": "/radio.app",
+  "start_url": "/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#282c35",
