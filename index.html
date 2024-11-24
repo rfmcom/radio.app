@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
-    <link rel="manifest" href="radio.app/manifest.json">
+    <link rel="manifest" href="/manifest.json">
     <title>raddio.app</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@900&display=block');
@@ -238,7 +238,7 @@
         generateRadioIcons();
         
         if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('radio.app/service-worker.js')
+  navigator.serviceWorker.register('/service-worker.js')
     .then(reg => console.log('Service Worker зарегистрирован:', reg.scope))
     .catch(err => console.error('Ошибка регистрации Service Worker:', err));
 }
