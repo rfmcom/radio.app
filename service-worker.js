@@ -3,8 +3,8 @@ self.addEventListener('install', event => {
     caches.open('raddio-app-cache').then(cache => {
       return cache.addAll([
         '/',
-        '/index.html',
-        '/manifest.json',
+        'radio.app/index.html',
+        'radio.app/manifest.json',
         '/img/icons/icon-192x192.png',
         '/img/icons/icon-512x512.png',
       ]);
