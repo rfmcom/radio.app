@@ -2,7 +2,7 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open('raddio-app-cache').then(cache => {
       return cache.addAll([
-        '/radio.app',
+        '/',
         '/index.html',
         '/manifest.json',
         '/img/icons/icon-192x192.png',
