@@ -1,6 +1,6 @@
 {
   "name": "RFM Box",
-  "short_name": "RFM_Box",
+  "short_name": "RFM Box",
   "start_url": "/radio.app/",
   "display": "standalone",
   "orientation": "any",
