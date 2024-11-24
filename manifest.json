@@ -1,12 +1,12 @@
 {
-  "name": "radio.app",
-  "short_name": "radio.app",
+  "name": "RFM Box",
+  "short_name": "RFM_Box",
   "start_url": "/radio.app/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#282c35",
   "theme_color": "#282c35",
-  "description": "A simple radio app for the web",
+  "description": "A simple RFM Box app for the web",
   "icons": [
     {
       "src": "img/icons/maskable.png",
