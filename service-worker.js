@@ -7,8 +7,6 @@ self.addEventListener('install', event => {
         '/radio.app/manifest.json',
         '/img/icons/icon-192x192.png',
         '/img/icons/icon-512x512.png',
-        '/css/styles.css',
-        '/js/main.js'
       ]);
     })
   );
